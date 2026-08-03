@@ -268,11 +268,18 @@ API key needed to reproduce any claim in the README.
 - **[triage-graph](https://github.com/Bluetenhonig/triage-graph)** —
   support-ticket triage on LangGraph + AutoGen, where personal data never
   reaches the model and a policy engine vets every promise before it is sent.
+  It is also the one that carries the load test and the capacity numbers:
+  [measured latency, saturation and failure behaviour](https://github.com/Bluetenhonig/triage-graph/blob/main/docs/performance.md), including the
+  finding that throughput saturates at the concurrency limit and every request
+  past it buys latency instead.
 - **[retrieval-graph](https://github.com/Bluetenhonig/retrieval-graph)** — RAG
   with retrieval scored separately from generation. Directly relevant here:
   this repo verifies that a citation is *real*, while that one measures whether
   the right source was ever retrieved in the first place. Its evaluation
   overturned three of its own design decisions, and documents each one.
+- **[access-kernel](https://github.com/Bluetenhonig/access-kernel)** — a
+  Semantic Kernel agent that performs real actions, where every effect passes a
+  deterministic gate between the model choosing a tool and the tool running.
 - **[agent-anatomy](https://github.com/Bluetenhonig/agent-anatomy)** — a
   teaching notebook on agent components and failure modes, for anyone who wants
   the ideas before the production machinery.
