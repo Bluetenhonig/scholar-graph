@@ -1,5 +1,10 @@
 # scholar-graph
 
+[![CI](https://github.com/Bluetenhonig/scholar-graph/actions/workflows/ci.yml/badge.svg)](https://github.com/Bluetenhonig/scholar-graph/actions/workflows/ci.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/)
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-green)](LICENSE)
+[![Checked with mypy](https://img.shields.io/badge/mypy-strict-2a6db2)](https://mypy-lang.org/)
+
 An evidence-grounded research agent built on **LangGraph**, with an **AutoGen**
 review board — and the production scaffolding that usually gets left out of
 agent demos: mechanical citation verification, hard cost budgets,
