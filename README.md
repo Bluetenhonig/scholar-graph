@@ -260,6 +260,23 @@ CI runs lint, types, tests on Python 3.11/3.12/3.13, and the eval gate.
 - [`docs/operations.md`](docs/operations.md) — running it in production: failure modes, cost control, observability, scaling limits
 - [`docs/adr/`](docs/adr/) — architecture decision records, including the ones that argue *against* the obvious choice
 
+## Related repositories
+
+Same conventions throughout — content-addressed cassettes, offline replay, no
+API key needed to reproduce any claim in the README.
+
+- **[triage-graph](https://github.com/Bluetenhonig/triage-graph)** —
+  support-ticket triage on LangGraph + AutoGen, where personal data never
+  reaches the model and a policy engine vets every promise before it is sent.
+- **[retrieval-graph](https://github.com/Bluetenhonig/retrieval-graph)** — RAG
+  with retrieval scored separately from generation. Directly relevant here:
+  this repo verifies that a citation is *real*, while that one measures whether
+  the right source was ever retrieved in the first place. Its evaluation
+  overturned three of its own design decisions, and documents each one.
+- **[agent-anatomy](https://github.com/Bluetenhonig/agent-anatomy)** — a
+  teaching notebook on agent components and failure modes, for anyone who wants
+  the ideas before the production machinery.
+
 ## Licence
 
 MIT
