@@ -1,0 +1,75 @@
+{
+  "key": "9c1e7f298e6c1c5d7f3460923d71181f59315da2902d2e30aec7a0f6e270fdd4",
+  "request": {
+    "max_tokens": 16000,
+    "messages": [
+      {
+        "content": "Research question: What techniques reduce large language model inference cost, and what do they trade away?\n\nSources:\n\nsource_id: ar-672be17ef4\ntitle: Speculative decoding with lightweight draft models\nabstract: A small draft model proposes tokens that the target model verifies in parallel. Because verification is exact, the output distribution is unchanged. We measure wall-clock speedups of 2.1 to 2.8 times on greedy decoding, with the acceptance rate of drafted tokens being the dominant factor in the realised gain.\n\nsource_id: ar-fba609d2f5\ntitle: Paged key-value caching for high-throughput transformer serving\nabstract: Fragmentation in the key-value cache wastes between 20 and 40 percent of GPU memory in production serving. Allocating the cache in fixed-size pages raises achievable batch size by 2.2 times and improves throughput by 1.9 times with no change to model outputs, since the technique is numerically exact.",
+        "role": "user"
+      }
+    ],
+    "model": "claude-haiku-4-5",
+    "output_config": {
+      "effort": "low",
+      "format": {
+        "schema": {
+          "$defs": {
+            "Note": {
+              "additionalProperties": false,
+              "description": "One extracted finding, bound to the exact span it came from.\n\n``quote`` must appear verbatim in the source document — that is the\ninvariant the verifier checks, and it is what makes a citation mean\nsomething rather than decorate something.",
+              "properties": {
+                "claim": {
+                  "title": "Claim",
+                  "type": "string"
+                },
+                "quote": {
+                  "title": "Quote",
+                  "type": "string"
+                },
+                "source_id": {
+                  "title": "Source Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "claim",
+                "quote",
+                "source_id"
+              ],
+              "title": "Note",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "notes": {
+              "items": {
+                "$ref": "#/$defs/Note"
+              },
+              "title": "Notes",
+              "type": "array"
+            }
+          },
+          "required": [
+            "notes"
+          ],
+          "title": "NoteSet",
+          "type": "object"
+        },
+        "type": "json_schema"
+      }
+    },
+    "system": "You extract citable findings from sources.\n\nFor each finding, return:\n- `source_id`: the exact id of the source it came from.\n- `claim`: the finding, stated in your own words in one sentence.\n- `quote`: a span copied VERBATIM from that source's title or abstract that supports the claim.\n\nThe quote is checked mechanically against the source text. Paraphrasing it, merging two spans, or reconstructing it from memory will fail that check and the finding will be discarded. Copy the characters exactly.\n\nExtract only what the sources actually establish. If a source says something is \"promising\" or \"suggests\", do not upgrade that to a demonstration. Prefer three well-grounded findings to ten shaky ones.\n"
+  },
+  "response": {
+    "purpose": "extract",
+    "stop_reason": "end_turn",
+    "text": "{\"notes\": [{\"source_id\": \"ar-672be17ef4\", \"claim\": \"A small draft model proposes tokens that the target model verifies in parallel.\", \"quote\": \"A small draft model proposes tokens that the target model verifies in parallel. Because verification is exact, the\"}, {\"source_id\": \"ar-fba609d2f5\", \"claim\": \"Fragmentation in the key-value cache wastes between 20 and 40 percent of GPU memory in production serving.\", \"quote\": \"Fragmentation in the key-value cache wastes between 20 and 40 percent of GPU memory in production serving. Allocating\"}]}",
+    "usage": {
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "input_tokens": 409,
+      "output_tokens": 135
+    }
+  }
+}

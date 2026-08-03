@@ -1,0 +1,73 @@
+{
+  "key": "964c578c2c31265b546e61c544dd36c11eceb8c3e17a2691b53d82313d684edf",
+  "request": {
+    "max_tokens": 16000,
+    "messages": [
+      {
+        "content": "Research question:\nWhat techniques reduce large language model inference cost, and what do they trade away?",
+        "role": "user"
+      }
+    ],
+    "model": "claude-opus-5",
+    "output_config": {
+      "effort": "medium",
+      "format": {
+        "schema": {
+          "additionalProperties": false,
+          "properties": {
+            "interpretation": {
+              "description": "What the question is actually asking, in one sentence.",
+              "title": "Interpretation",
+              "type": "string"
+            },
+            "search_queries": {
+              "description": "Literal keyword queries for a paper database.",
+              "items": {
+                "type": "string"
+              },
+              "title": "Search Queries",
+              "type": "array"
+            },
+            "sub_questions": {
+              "description": "Independent facets that must each be answered.",
+              "items": {
+                "type": "string"
+              },
+              "title": "Sub Questions",
+              "type": "array"
+            },
+            "success_criteria": {
+              "description": "What a complete answer must contain, used to decide when to stop searching.",
+              "items": {
+                "type": "string"
+              },
+              "title": "Success Criteria",
+              "type": "array"
+            }
+          },
+          "required": [
+            "interpretation",
+            "search_queries",
+            "sub_questions",
+            "success_criteria"
+          ],
+          "title": "ResearchPlan",
+          "type": "object"
+        },
+        "type": "json_schema"
+      }
+    },
+    "system": "You plan literature searches. Given a research question, decompose it into the facets that must each be answered, and write literal keyword queries suitable for an academic search engine.\n\nRules:\n- Queries are keywords, not questions. \"transformer attention quadratic cost\", not \"why is attention expensive?\".\n- 3 to 5 queries. Each must target a different facet; near-duplicates waste budget.\n- Success criteria are checkable statements about what a complete answer contains, not vague aspirations. \"Names at least two distinct mitigation approaches\" is checkable; \"is thorough\" is not.\n- If the question is ambiguous, state the most useful reading in `interpretation` and plan for that. Do not ask for clarification.\n"
+  },
+  "response": {
+    "purpose": "plan",
+    "stop_reason": "end_turn",
+    "text": "{\"interpretation\": \"Which engineering techniques lower the cost of serving large language models, and what quality or resource cost does each carry?\", \"sub_questions\": [\"Attention and architecture-level techniques\", \"Numerical precision techniques\", \"Serving and scheduling techniques\"], \"search_queries\": [\"sparse attention inference latency long context\", \"post-training quantisation language model quality\", \"key value cache paging continuous batching throughput\"], \"success_criteria\": [\"Names at least three distinct cost-reduction techniques\", \"States the quality or resource trade-off for each technique\", \"Distinguishes techniques that change model outputs from those that do not\"]}",
+    "usage": {
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "input_tokens": 206,
+      "output_tokens": 172
+    }
+  }
+}

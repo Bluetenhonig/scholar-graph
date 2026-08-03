@@ -1,0 +1,2 @@
+{"id": "cost-techniques", "question": "What techniques reduce large language model inference cost, and what do they trade away?", "must_mention": ["attention", "quantis", "cach"], "min_sources": 4}
+{"id": "quant-vs-sparse", "question": "How much can quantisation and sparse attention reduce serving cost without hurting quality?", "must_mention": ["quantis", "attention"], "min_sources": 4}

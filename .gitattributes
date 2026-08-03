@@ -1,0 +1,8 @@
+# Normalise to LF in the repository and in every checkout. Cassette keys are
+# hashes of request bodies; committing CRLF would make recordings that replay
+# on one platform and miss on another.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.sqlite binary

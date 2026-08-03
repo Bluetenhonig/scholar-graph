@@ -1,0 +1,74 @@
+{
+  "key": "baabe2ee77db678985f53e04d7e08be053443c282450264c386a7989c9f43fd1",
+  "request": {
+    "max_tokens": 16000,
+    "messages": [
+      {
+        "content": "Research question: What techniques reduce large language model inference cost, and what do they trade away?\n\nSources:\n\nsource_id: op-2ef63e909b\ntitle: Continuous batching for large language model inference servers\nabstract: Static batching leaves accelerators idle while short requests wait for long ones. Continuous batching admits new requests at each decoding step and raises measured throughput by up to 23 times at the same latency target under bursty traffic.\n\nsource_id: op-e759cc08df\ntitle: Sparse attention patterns for efficient long-context inference\nabstract: We evaluate block-sparse and sliding-window attention across sequence lengths from 4k to 128k tokens. Block-sparse attention reduces inference latency by 38 percent at 32k context while accuracy on long-context benchmarks falls by less than one point. The saving grows with sequence length because attention cost is quadratic in context whereas the sparse variants are close to linear.\n\nsource_id: op-6fcacebcc0\ntitle: A systematic study of post-training quantisation for language model serving\nabstract: Across seven open-weight models we find that eight-bit weight quantisation halves memory footprint with a mean quality loss of 0.4 points, whereas four-bit quantisation degrades multi-step reasoning benchmarks by 6.1 points on average. Quantising activations is consistently more damaging than quantising weights.\n\nsource_id: op-a42cd32d44\ntitle: Mixture-of-experts routing reduces active parameter count\nabstract: Sparse mixture-of-experts layers activate a fraction of parameters per token. We report a 4.3 times reduction in active parameters at matched quality, though total memory required to hold all experts increases, which shifts the bottleneck from compute to memory capacity in single-GPU deployments.\n\nsource_id: op-7252e4fad8\ntitle: Nitrogen mineralisation in temperate grassland soils\nabstract: Nitrogen mineralisation rates were measured monthly across three grassland sites over two growing seasons. Rates correlated with soil temperature and moisture.\n\nsource_id: ar-672be17ef4\ntitle: Speculative decoding with lightweight draft models\nabstract: A small draft model proposes tokens that the target model verifies in parallel. Because verification is exact, the output distribution is unchanged. We measure wall-clock speedups of 2.1 to 2.8 times on greedy decoding, with the acceptance rate of drafted tokens being the dominant factor in the realised gain.\n\nsource_id: ar-fba609d2f5\ntitle: Paged key-value caching for high-throughput transformer serving\nabstract: Fragmentation in the key-value cache wastes between 20 and 40 percent of GPU memory in production serving. Allocating the cache in fixed-size pages raises achievable batch size by 2.2 times and improves throughput by 1.9 times with no change to model outputs, since the technique is numerically exact.",
+        "role": "user"
+      }
+    ],
+    "model": "claude-haiku-4-5",
+    "output_config": {
+      "effort": "low",
+      "format": {
+        "schema": {
+          "$defs": {
+            "ScreeningVerdict": {
+              "additionalProperties": false,
+              "properties": {
+                "reason": {
+                  "title": "Reason",
+                  "type": "string"
+                },
+                "relevant": {
+                  "title": "Relevant",
+                  "type": "boolean"
+                },
+                "source_id": {
+                  "title": "Source Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "reason",
+                "relevant",
+                "source_id"
+              ],
+              "title": "ScreeningVerdict",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "verdicts": {
+              "items": {
+                "$ref": "#/$defs/ScreeningVerdict"
+              },
+              "title": "Verdicts",
+              "type": "array"
+            }
+          },
+          "required": [
+            "verdicts"
+          ],
+          "title": "ScreeningResult",
+          "type": "object"
+        },
+        "type": "json_schema"
+      }
+    },
+    "system": "You screen search results for relevance to a research question.\n\nFor each source, decide whether it could support an answer. Judge on the title and abstract you are given — do not speculate about what the full text might say.\n\nBe strict. A source that is merely topic-adjacent is not relevant: including it costs downstream budget and dilutes the evidence base. Mark relevant only if you can name what it would contribute.\n\nReturn one verdict per source, using the exact source_id given.\n"
+  },
+  "response": {
+    "purpose": "screen",
+    "stop_reason": "end_turn",
+    "text": "{\"verdicts\": [{\"source_id\": \"op-2ef63e909b\", \"relevant\": true, \"reason\": \"Reports a concrete cost-reduction result.\"}, {\"source_id\": \"op-e759cc08df\", \"relevant\": true, \"reason\": \"Reports a concrete cost-reduction result.\"}, {\"source_id\": \"op-6fcacebcc0\", \"relevant\": true, \"reason\": \"Reports a concrete cost-reduction result.\"}, {\"source_id\": \"op-a42cd32d44\", \"relevant\": true, \"reason\": \"Reports a concrete cost-reduction result.\"}, {\"source_id\": \"op-7252e4fad8\", \"relevant\": false, \"reason\": \"Soil science, unrelated to model serving.\"}, {\"source_id\": \"ar-672be17ef4\", \"relevant\": true, \"reason\": \"Reports a concrete cost-reduction result.\"}, {\"source_id\": \"ar-fba609d2f5\", \"relevant\": true, \"reason\": \"Reports a concrete cost-reduction result.\"}]}",
+    "usage": {
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "input_tokens": 836,
+      "output_tokens": 187
+    }
+  }
+}

@@ -1,0 +1,93 @@
+[project]
+name = "scholar-graph"
+version = "0.1.0"
+description = "A production-shaped research agent: LangGraph state machine, AutoGen review board, citation verification, cost budgets, and deterministic replay."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "scholar-graph contributors" }]
+keywords = ["langgraph", "langchain", "autogen", "agents", "llm", "rag", "evaluation"]
+
+dependencies = [
+    "langgraph>=0.2.60",
+    "langgraph-checkpoint-sqlite>=2.0.0",
+    "anthropic>=0.40.0",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "httpx>=0.27",
+    "tenacity>=9.0",
+    "structlog>=24.4",
+    "typer>=0.15",
+    "rich>=13.9",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "sse-starlette>=2.1",
+    "aiosqlite>=0.20",
+]
+
+[project.optional-dependencies]
+panel = [
+    "autogen-agentchat>=0.4.0",
+    "autogen-core>=0.4.0",
+]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "respx>=0.21",
+]
+
+[project.scripts]
+scholar-graph = "scholar_graph.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/Bluetenhonig/scholar-graph"
+Documentation = "https://github.com/Bluetenhonig/scholar-graph/tree/main/docs"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scholar_graph"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "BLE", "SIM", "RUF", "ASYNC", "T20"]
+ignore = ["B008"]  # typer/fastapi use callables in defaults by design
+
+[tool.ruff.lint.isort]
+known-first-party = ["scholar_graph", "tests"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["T20"]
+"evals/*" = ["T20"]
+"src/scholar_graph/cli.py" = ["T20"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+disallow_untyped_decorators = false
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["autogen_agentchat.*", "autogen_core.*", "langgraph.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-q --strict-markers"
+markers = [
+    "live: hits real APIs; skipped unless SCHOLAR_GRAPH_LLM_MODE=live",
+]
+
+[tool.coverage.run]
+source = ["src/scholar_graph"]

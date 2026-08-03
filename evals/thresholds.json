@@ -1,0 +1,10 @@
+{
+  "_comment": "CI fails when a metric crosses these. Tightened as the system improves; never loosened to make a red build green.",
+  "min_citation_precision": 1.0,
+  "min_groundedness": 1.0,
+  "min_verification_pass_rate": 1.0,
+  "min_coverage_rate": 1.0,
+  "min_source_rate": 1.0,
+  "max_usd_per_run": 0.08,
+  "max_seconds_per_run": 120.0
+}

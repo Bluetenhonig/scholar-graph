@@ -1,0 +1,17 @@
+{
+  "key": "7989e1df1e77a4485e3e6599d35bb8802a16d233902f725a253e3add0696860a",
+  "request": {
+    "method": "GET",
+    "params": {
+      "max_results": "8",
+      "search_query": "all:key value cache paging continuous batching throughput",
+      "sortBy": "relevance",
+      "sortOrder": "descending"
+    },
+    "url": "https://export.arxiv.org/api/query"
+  },
+  "response": {
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\"><entry>\n    <id>https://arxiv.org/abs/2401.10101</id>\n    <title>Paged key-value caching for high-throughput transformer serving</title>\n    <summary>Fragmentation in the key-value cache wastes between 20 and 40 percent of GPU memory in production serving. Allocating the cache in fixed-size pages raises achievable batch size by 2.2 times and improves throughput by 1.9 times with no change to model outputs, since the technique is numerically exact.</summary>\n    <published>2024-01-18T00:00:00Z</published>\n    <author><name>Barbara Liskov</name></author>\n  </entry><entry>\n    <id>https://arxiv.org/abs/2402.20202</id>\n    <title>Speculative decoding with lightweight draft models</title>\n    <summary>A small draft model proposes tokens that the target model verifies in parallel. Because verification is exact, the output distribution is unchanged. We measure wall-clock speedups of 2.1 to 2.8 times on greedy decoding, with the acceptance rate of drafted tokens being the dominant factor in the realised gain.</summary>\n    <published>2024-02-29T00:00:00Z</published>\n    <author><name>Edsger Dijkstra</name></author><author><name>Frances Allen</name></author>\n  </entry></feed>",
+    "purpose": "arxiv:key value cache paging continuous batching throughput"
+  }
+}
