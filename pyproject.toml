@@ -83,6 +83,10 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Make `tests.conftest` importable regardless of how pytest is invoked.
+# Without this, `python -m pytest` works (it puts CWD on sys.path) but a bare
+# `pytest` / `uv run pytest` does not — a difference that shows up only in CI.
+pythonpath = ["."]
 asyncio_mode = "auto"
 addopts = "-q --strict-markers"
 markers = [
